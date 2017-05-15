@@ -1,0 +1,65 @@
+/* 标题1 */
+h1{
+  text-align: center;
+}
+
+/* 标题2 */
+h2{
+  border-left: 10px solid #337;
+  border-bottom: 3px double #337;
+  padding-left: 10px;
+}
+h2::before{
+  content: '※ '
+}
+
+/* 标题3 */
+h3{
+  border-left: 7px solid #556;
+  border-bottom: 1px solid #556;
+  padding-left: 7px;
+}
+h3::before{
+  content: '§ '
+}
+
+/* 折叠面板 标题 */
+.panel-default>.panel-heading{
+  background: #ddd;
+  border: 1px solid rgba(100,100,100,0.5);
+}
+/* 折叠面板 标题前缀 */
+.panel-default>.panel-heading>b:before{
+  content: '>> '
+}
+/* 折叠面板 展开按钮 */
+.panel-default>.panel-heading>b>a.pull-right.section.atTitle.btn.btn-default{
+  background: #333;
+  color: #7bb2e8;
+}
+/* 折叠面板 内容 */
+div.panel.panel-default div.panel-body{
+  padding: 0 6px;
+  background: #eee;
+  border-left: 1px solid rgba(100,100,100,0.5);
+  border-right: 1px solid rgba(100,100,100,0.5);
+  border-bottom: 1px solid rgba(100,100,100,0.5);
+}
+
+/* 水平分隔线： --- */
+.markdown-section hr{
+  height: 1px;
+  background-color: #b7b8d0;
+  box-shadow: 1px 1px #aaa;
+}
+
+/* 行内代码 背景色 */
+.markdown-section code{
+  background-color: #e7e7e7;
+}
+/* Glossary 样式 */
+.markdown-section .glossary-term{
+  color: #000;
+  padding: 0 4px;
+  border-radius: 3px;
+}
