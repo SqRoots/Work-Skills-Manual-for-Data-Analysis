@@ -14,9 +14,9 @@ def replace_cdn(p):
     fo.close()
     fc2 = re.sub(r'https://cdn\.mathjax\.org/mathjax/[^\/]+/MathJax\.js',
                            r'//cdn.bootcss.com/mathjax/2.7.0/MathJax.js', fc)
-    fc2 = re.sub(r'https://maxcdn.bootstrapcdn.com/bootstrap/[^\/]+/js/bootstrap.min.js',
+    fc2 = re.sub(r'https://maxcdn\.bootstrapcdn\.com/bootstrap/[^\/]+/js/bootstrap\.min\.js',
                            r'//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js', fc2)
-    fc2 = re.sub(r'https://maxcdn.bootstrapcdn.com/bootstrap/[^\/]+/css/bootstrap.min.css',
+    fc2 = re.sub(r'https://maxcdn\.bootstrapcdn\.com/bootstrap/[^\/]+/css/bootstrap\.min\.css',
                            r'//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css', fc2)
     fo = open(p, 'w+', encoding="utf8")
     fo.write(fc2)
