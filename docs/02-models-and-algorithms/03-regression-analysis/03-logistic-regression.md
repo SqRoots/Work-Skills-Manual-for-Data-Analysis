@@ -163,3 +163,22 @@ p=\\frac{{{e}^{Q}}}{1+{{e}^{Q}}}=\\frac{{{e}^{{{\\theta }_{0}}+{{\\theta }_{1}}{
 \$\$
 {% endraw %}
 的梯度算子。
+
+----
+
+{% raw %}
+\\[
+\\left( \\begin{matrix}   1 & {{x}_{11}} & {{x}_{12}} & \\cdots  & {{x}_{1n}} & {{y}_{1}}  \\\\   1 & {{x}_{21}} & {{x}_{22}} & \\cdots  & {{x}_{2n}} & {{y}_{2}}  \\\\   \\vdots  & \\vdots  & \\vdots  & \\ddots  & \\vdots  & \\vdots   \\\\   1 & {{x}_{m1}} & {{x}_{m2}} & \\cdots  & {{x}_{mn}} & {{y}_{m}}  \\\\ \\end{matrix} \right)
+\\]
+{% endraw %}
+
+{% raw %}
+\\[
+\\left( \\begin{matrix}
+ 1 & {{x}_{11}} & {{x}_{12}} & \\cdots  & {{x}_{1n}} & {{y}_{1}}  \\\\
+ 1 & {{x}_{21}} & {{x}_{22}} & \\cdots  & {{x}_{2n}} & {{y}_{2}}  \\\\
+ \\vdots  & \\vdots  & \\vdots  & \\ddots  & \\vdots  & \\vdots   \\\\
+ 1 & {{x}_{m1}} & {{x}_{m2}} & \\cdots  & {{x}_{mn}} & {{y}_{m}}  \\\\
+\\end{matrix} \\right)
+\\]
+{% endraw %}
