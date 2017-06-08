@@ -50,7 +50,7 @@
             "appid": "cysWoUDnf"
         },
         "mathjax": {
-            "forceSVG": true
+            "forceSVG": false
         },
         "prism": {
             "css": [

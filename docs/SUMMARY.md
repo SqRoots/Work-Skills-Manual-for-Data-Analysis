@@ -20,7 +20,7 @@
 ## 3. 计算机基础
 * [Excel &  Word & PPT]()
 * [Mathematica]()
-
+* [test](./test.md)
 
 ---
 
