@@ -32,7 +32,7 @@
         "ace",
         "emphasize",
         "mathjax",
-        "splitter",
+        "-splitter",
         "mermaid",
         "tbfed-pagefooter",
         "expandable-chapters-small",
