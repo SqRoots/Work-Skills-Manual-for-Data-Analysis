@@ -10,16 +10,22 @@ from os.path import join as os_path_join
 # 替换Markdown文档中的转义字符
 def replace_escaped_characters(path):
     fo = open(path, 'r+', encoding="utf8")
-    s = fo.read()
+    md_str = fo.read()
     fo.close()
     # 处理 {% raw %}--{% endraw %} 或 {% math %}--{% endmath %}
-    ss = re.findall(r'\{\%\s*raw\s*\%\}(.+?)\{\%\s*endraw\s*\%\}', s, flags=re.I|re.M|re.S)
+    md_str_raws = re.findall(r'\{\%\s*raw\s*\%\}(.+?)\{\%\s*endraw\s*\%\}', md_str, flags=re.I|re.M|re.S)
     k = 1
-    for i in ss:
-        k += 1
-        ns = re.sub(r'(?P<aa>[\_\{\}\\\$])', r'\\\g<aa>', i, flags=re.I | re.M | re.S)
-        print(i)
-        s = s.replace(i, ns)
+    for md_str_raw in md_str_raws:
+        ii = md_str_raw.strip(' \n\r')
+        if ii[0] == '$' or ii[0:2] == r'\[':
+            k += 1
+            ii = re.sub(r'^\\\[|\\\]$', '$$', ii, flags=re.I) # 处理 \[--\]
+            ns = re.sub(r'(?P<aa>[\_\{\}\\\$])', r'\\\g<aa>', ii, flags=re.I | re.M | re.S)
+            md_str = md_str.replace(md_str_raw, ns)
+        if k > 10000:
+            break
+    # 处理 \[--\]
+
     # 处理 $$--$$
     # ss = re.findall(r'\${2}([^$]+?|\\\$+?)\${2}', s, flags=re.I|re.M|re.A)
     # k = 1
@@ -30,10 +36,8 @@ def replace_escaped_characters(path):
     #         print(ns)
     #         s = s.replace(i, ns)
     path_new = re.sub(r'-o\.md$', r'.md', path, flags=re.I)
-    print(path_new)
-    fo = open(path_new, 'w', encoding="utf8")
-    fo.write(s)
-    fo.close()
+    with open(path_new, 'w', encoding="utf8") as f:
+        f.write(md_str)
 
 
 curr_folder = os_path_join(os_path_abspath('.'), 'docs/')
