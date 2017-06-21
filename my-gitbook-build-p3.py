@@ -2,9 +2,8 @@
 # coding=utf-8
 
 import re
-import sys
 import os
-current_path = sys.path[0]
+current_path = os.path.dirname(os.path.realpath(__file__))
 
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -13,9 +12,8 @@ current_path = sys.path[0]
 # 替换 Markdown 中的转义字符
 # 主要是为了处理数学公式中的特殊字符
 def replace_escaped_characters(path):
-    fo = open(path, 'r+', encoding="utf8")
-    md_str = fo.read()
-    fo.close()
+    with open(path, 'r', encoding="utf8") as f:
+        md_str = f.read()
     # 处理 {% raw %}--{% endraw %} 或 {% math %}--{% endmath %}
     md_str_raws = re.findall(r'\{\%\s*raw\s*\%\}(.+?)\{\%\s*endraw\s*\%\}', md_str, flags=re.I|re.M|re.S)
     k = 1
@@ -56,15 +54,14 @@ print('gitbook build done!')
 # 2. 修改“*.html”中的：国外镜像为国内镜像
 # 修改 *.html 中的链接：改为国内 CDN 镜像
 def replace_cdn(path):
-    with open(path, 'r', encoding='UTF-8') as f:
+    with open(path, 'w+', encoding='UTF-8') as f:
         fc = f.read()
-    fc2 = re.sub(r'https://cdn\.mathjax\.org/mathjax/[^\/]+/MathJax\.js',
-        r'//cdn.bootcss.com/mathjax/2.7.0/MathJax.js', fc)
-    fc2 = re.sub(r'https://maxcdn\.bootstrapcdn\.com/bootstrap/[^\/]+/js/bootstrap\.min\.js',
-        r'//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js', fc2)
-    fc2 = re.sub(r'https://maxcdn\.bootstrapcdn\.com/bootstrap/[^\/]+/css/bootstrap\.min\.css',
-        r'//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css', fc2)
-    with open(path, 'w+', encoding="utf8") as f:
+        fc2 = re.sub(r'https://cdn\.mathjax\.org/mathjax/[^\/]+/MathJax\.js',
+            r'//cdn.bootcss.com/mathjax/2.7.0/MathJax.js', fc)
+        fc2 = re.sub(r'https://maxcdn\.bootstrapcdn\.com/bootstrap/[^\/]+/js/bootstrap\.min\.js',
+            r'//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js', fc2)
+        fc2 = re.sub(r'https://maxcdn\.bootstrapcdn\.com/bootstrap/[^\/]+/css/bootstrap\.min\.css',
+            r'//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css', fc2)
         f.write(fc2)
     print('https and CDN done:\t' + path)
 
@@ -78,11 +75,9 @@ for (path, sub_paths, file_names) in os.walk(my_path):
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 # 修改 畅言 中的链接：改 http 为 https
 my_path = os.path.join(current_path, '_book/gitbook/gitbook-plugin-changyan/changyan.js')
-with open(my_path, 'r', encoding='UTF-8') as f:
+with open(my_path, 'w+', encoding='UTF-8') as f:
     file_content = f.read()
-
-file_content2 = re.sub(r'http://', r'https://', file_content)
-with open(my_path, 'w+', encoding="utf8") as f:
+    file_content2 = re.sub(r'http://', r'https://', file_content)
     f.write(file_content2)
 print('https done:\t' + 'changyan')
 
@@ -116,10 +111,8 @@ mathjax_conf = '''
 '''
 
 my_path = os.path.join(current_path, '_book/gitbook/gitbook-plugin-mathjax/plugin.js')
-with open(my_path, 'r', encoding='UTF-8') as f:
+with open(my_path, 'w+', encoding='UTF-8') as f:
     file_content = f.read()
-
-file_content2 = re.sub(r'tex2jax\:\s\{\}', mathjax_conf, file_content)
-with open(my_path, 'w+', encoding="utf8") as f:
+    file_content2 = re.sub(r'tex2jax\:\s\{\}', mathjax_conf, file_content)
     f.write(file_content2)
 print('MathJax done:\t' + 'MathJax')
